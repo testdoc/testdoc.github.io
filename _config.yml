@@ -1,29 +1,24 @@
-name: Kubernetes
+name: TestDoc
 markdown: kramdown
 kramdown:
-  input: GFM
-  html_to_native: true
-  hard_wrap: false
-  syntax_highlighter: rouge
-baseurl: /
-incremental: true
+   input: GFM
+   
+permalink: /blogs/:year/:month/:day/:title
 
-safe: false
-lsi: false
+# Where things are
+source:       .
+destination:  ./_site
+plugins_dir:  ./_plugins
+layouts_dir:  ./_layouts
+data_dir:     ./_data
+includes_dir: ./_includes
+collections:  null
 
 defaults:
   -
     scope:
-      path: ""
+      path: "docs" # an empty string here means all files in the project
     values:
-      version: "v1.2"
-      githubbranch: "release-1.2"
-      docsbranch: "master"
-  -
-    scope:
-      path: "docs"
-    values:
-      layout: docwithnav
-      showedit: true
-
+      layout: "default"
+      
 permalink: pretty
