@@ -1,0 +1,22 @@
+bigheader: "CLC Documentation"
+abstract: "How to get started and achieve tasks using Systemwalker Service Cloud Load Control"
+toc:
+- title: CLC Documentation
+  path: /docs/
+  
+- title: Overview
+  section:
+  - title: What is CLC?
+    path: /docs/whatisclc/
+  - title: CLC components
+    path: /docs/clccomponents/
+
+- title: Installing and Using CLC
+  path: /docs/install/
+  section:
+  - title: Preparations
+    path: /docs/preparations/
+  - title: Installing
+    path: /docs/installing/
+  - title: Using
+    path: /docs/using/
