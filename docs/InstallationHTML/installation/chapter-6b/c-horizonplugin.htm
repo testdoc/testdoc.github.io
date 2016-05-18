@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en-us" lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Uninstalling the CLC Horizon Plugin" />
+<meta scheme="URI" name="DC.Relation" content="../../installation/chapter-6b/c-uninstall.htm" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="About" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="../../commonltr.css" type="text/css" rel="stylesheet" />
+<link href="../../book.css" type="text/css" rel="stylesheet" />
+<title>Uninstalling the CLC Horizon Plugin</title>
+</head>
+<body id="About">
+
+
+    <h1 class="topictitle1">Uninstalling the <span>CLC</span> Horizon Plugin</h1>
+
+    <div>
+        <div class="section">
+            <p>Proceed as follows to uninstall the <span>CLC</span> plugin from the OpenStack dashboard: </p>
+
+            <div class="p">
+                <ol>
+                    <li class="liexpand">Log in as a superuser to the OpenStack host where the dashboard is installed.</li>
+
+                    <li class="liexpand">Delete the folder on your OpenStack host where the <span>CLC</span> Horizon plugin is installed (<samp class="codeph">&lt;horizon-root-folder&gt;/wlm</samp>).<p>For example:</p>
+<div class="p">
+                            
+<div class="tablenoborder"><table summary="" cellspacing="0" cellpadding="4" frame="border" border="1" rules="rows">
+                                    
+                                    <tbody>
+                                        <tr>
+                                            <td class="cellrowborder" valign="top" width="100%">
+                                                <p><samp class="codeph">rm -rf /usr/share/openstack-dashboard/wlm</samp></p>
+
+                                            </td>
+
+                                        </tr>
+
+                                    </tbody>
+
+                                </table>
+</div>
+
+                        </div>
+</li>
+
+                    <li class="liexpand">Remove the <span>CLC</span> Horizon plugin registry entries <samp class="codeph">wlm.py</samp> and <samp class="codeph">wlm.pyc</samp> (compiled version).<p>For example: </p>
+<div class="p">
+                                
+<div class="tablenoborder"><table summary="" cellspacing="0" cellpadding="4" frame="border" border="1" rules="rows">
+                                    
+                                    <tbody>
+                                        <tr>
+                                            <td class="cellrowborder" valign="top" width="100%">
+                                                <p><samp class="codeph">rm -f \ /usr/share/openstack-dashboard/openstack_dashboard/local/enabled/wlm.py</samp></p>
+
+                                            </td>
+
+                                        </tr>
+
+                                    </tbody>
+
+                                </table>
+</div>
+
+                        </div>
+<p>and </p>
+<div class="p">
+                            
+<div class="tablenoborder"><table summary="" cellspacing="0" cellpadding="4" frame="border" border="1" rules="rows">
+                                    
+                                    <tbody>
+                                        <tr>
+                                            <td class="cellrowborder" valign="top" width="100%">
+                                                <p><samp class="codeph">rm -f \ /usr/share/openstack-dashboard/openstack_dashboard/local/enabled/wlm.pyc</samp></p>
+
+                                            </td>
+
+                                        </tr>
+
+                                    </tbody>
+
+                                </table>
+</div>
+
+                        </div>
+</li>
+
+                    <li class="liexpand">Since the <span>CLC</span>-specific panel added to the OpenStack dashboard required some Javascript and a style sheet so that it could be rendered completely, you need to clean up these static files and remove them from your OpenStack environment. <p>Execute the following command in the <samp class="codeph">&lt;horizon-root-folder&gt;</samp> folder:</p>
+<div class="p">
+                                    
+<div class="tablenoborder"><table summary="" cellspacing="0" cellpadding="4" frame="border" border="1" rules="rows">
+                                    
+                                    <tbody>
+                                        <tr>
+                                            <td class="cellrowborder" valign="top" width="100%">
+                                                <p><samp class="codeph">sudo ./manage.py collectstatic --noinput</samp></p>
+
+                                            </td>
+
+                                        </tr>
+
+                                    </tbody>
+
+                                </table>
+</div>
+
+                        </div>
+</li>
+
+                    <li class="liexpand">For finishing the deletion of the <span>CLC</span> plugin from the dashboard, restart the Horizon service. <p>For example:</p>
+<div class="p">
+                                
+<div class="tablenoborder"><table summary="" cellspacing="0" cellpadding="4" frame="border" border="1" rules="rows">
+                                    
+                                    <tbody>
+                                        <tr>
+                                            <td class="cellrowborder" valign="top" width="100%">
+                                                <p><samp class="codeph">sudo service httpd restart</samp></p>
+
+                                            </td>
+
+                                        </tr>
+
+                                    </tbody>
+
+                                </table>
+</div>
+
+                        </div>
+</li>
+
+                </ol>
+
+            </div>
+
+            <div class="p">
+                <div class="note"><span class="notetitle">Note:</span> Uninstalling the Horizon plugin does not affect existing clusters. The nodes can still be accessed using <samp class="codeph">kubectl</samp> commands.</div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="../../installation/chapter-6b/c-uninstall.htm">Manually Uninstalling CLC</a></div>
+</div>
+</div>
+
+</body>
+</html>

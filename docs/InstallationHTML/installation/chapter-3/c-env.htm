@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en-us" lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Preparing the Installation Environment" />
+<meta scheme="URI" name="DC.Relation" content="../../installation/chapter-3/c-install.htm" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="About" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="../../commonltr.css" type="text/css" rel="stylesheet" />
+<link href="../../book.css" type="text/css" rel="stylesheet" />
+<title>Preparing the Installation Environment</title>
+</head>
+<body id="About">
+
+
+    <h1 class="topictitle1">Preparing the Installation Environment</h1>
+
+    <div>
+        <div class="section">Before you run the script for automatically installing <span>CLC</span> in your OpenStack environment, prepare the installation environment on the host where the OpenStack Horizon service is installed as described in the following sections.<div class="p">
+                <div class="note"><span class="notetitle">Note:</span> You can only use the script if you are operating an OpenStack environment with one Horizon host only.</div>
+
+            </div>
+</div>
+
+        <div class="section"><h4 class="sectiontitle">Ansible 1.9</h4>
+            
+            <p>Ansible is required for installing the <span>CLC</span> software components. Ansible is a simple IT automation platform that makes applications and systems easier to deploy. With Ansible, you avoid writing scripts or custom code to deploy and update applications. Ansible is part of your Red Hat Enterprise Linux environment.</p>
+
+            <p>The automated installation of <span>CLC</span> is based on an Ansible playbook, and has been tested using Ansible Version 1.9.4.1.</p>
+
+            <p>To check the version: </p>
+
+            <div class="p">
+                <pre class="codeblock">ansible --version</pre>
+
+            </div>
+
+            <p>Refer to the Red Hat Enterprise Linux Web site for available updates, if required. </p>
+
+        </div>
+
+        <div class="section"><h4 class="sectiontitle">Preparing Configuration Settings</h4>
+            
+            <p>Before you can run the <span>CLC</span> installer, you need to specify several configuration settings for identifying your OpenStack environment in the <samp class="codeph">wlm-config.yaml</samp> configuration file.</p>
+
+            <p>You need the following information at hand:  </p>
+
+            <ul>
+                <li><strong>IP address</strong> of your environment's <strong>DNS server</strong>. By default, Google's 8.8.8.8 IP address is used. </li>
+
+                <li>Credentials for the <strong>Glance client</strong> configuration: <p>The <span>CLC</span> installation procedure registers the CentOS Atomic host image using the OpenStack Glance client. You must have the appropriate user credentials so that the OpenStack Glance client can make queries against your OpenStack cloud. You need to set the required environment variables for the OpenStack Glance client.</p>
+To check the user credentials in OpenStack:<ol>
+                        <li class="liexpand">Login to the OpenStack dashboard as an administrator.</li>
+
+                        <li class="liexpand">Select the project for which you want to install and register the <span>CLC</span> CentOS Atomic host image and which you want to use for provisioning clusters.</li>
+
+                        <li class="liexpand">Go to <strong>Project &gt; Compute &gt; Access &amp; Security &gt; API Access</strong> and click <strong>View Credentials</strong>.</li>
+
+                        <li class="liexpand">Note down the following information: <div class="p">
+                                <ul>
+                                    <li><strong>Authentication URL</strong> (<samp class="codeph">os_auth_url</samp>): The URL of your Keystone authentication server.</li>
+
+                                    <li><strong>Project ID</strong> (<samp class="codeph">os_tenant_id</samp>): The ID of the selected OpenStack project.</li>
+
+                                    <li><strong>User Name</strong> (<samp class="codeph">os_username</samp>): The name of the user who is to install <span>CLC</span>.</li>
+
+                                </ul>
+
+                            </div>
+<p>In addition, you need the <strong>OpenStack password</strong> of the installing user.</p>
+</li>
+
+                    </ol>
+</li>
+
+            </ul>
+
+            <p>Now you can proceed with editing the <samp class="codeph">wlm-config.yaml</samp> file and specifying the parameters matching your environment: </p>
+
+            <div class="p">
+                <ol>
+                    <li>Go to the <samp class="codeph">&lt;InstDir&gt;/auto-installation</samp> folder.</li>
+
+                    <li>Edit the <samp class="codeph">wlm-config.yaml</samp> configuration file and specify the following: <div class="p">
+                            <ul>
+                                <li><samp class="codeph">horizon_directory</samp>: <p>The root folder where Horizon is installed (<samp class="codeph">&lt;horizon_root_folder&gt;</samp>. The path to the Horizon root folder must be valid and existing in your OpenStack environment.</p>
+</li>
+
+                                
+                                <li><samp class="codeph">dns_server_ip</samp>: <p>The IP address of the DNS server used by the master and worker nodes. This address is checked by the <span>CLC</span> installation procedure whether domain names can be resolved. </p>
+</li>
+
+                                <li><samp class="codeph">os_auth_url</samp>: <p>The URL of your Keystone authentication server. This URL can be looked up in your OpenStack environment (<strong>Project &gt; Compute &gt; Access &amp; Security &gt; API Access</strong>). </p>
+</li>
+
+                                <li><samp class="codeph">os_tenant_id</samp>: <p>The ID of the OpenStack project you use for the provisioning of clusters. This ID can be looked up in your OpenStack environment (<strong>Project &gt; Compute &gt; Access &amp; Security &gt; API Access</strong>). </p>
+</li>
+
+                                <li><samp class="codeph">os_username</samp>: <p>The OpenStack name of the user who installs <span>CLC</span>. This name  can be looked up in your OpenStack environment (<strong>Project &gt; Compute &gt; Access &amp; Security &gt; API Access</strong>). </p>
+</li>
+
+                                <li><samp class="codeph">os_password_input</samp>: The OpenStack password of the user who installs <span>CLC</span>.</li>
+
+                            </ul>
+
+                        </div>
+<div class="p">
+                            <div class="note"><span class="notetitle">Note:</span> The values in the <samp class="codeph">wlm-config.yaml</samp> file must follow the YAML syntax rules. It is recommended to always enclose user names and passwords with double quotes, since they may contain special characters. <p>Example: </p>
+<p><samp class="codeph">os_username: "myUser5"</samp></p>
+<p><samp class="codeph">os_password_input: "My#secure_password123"</samp></p>
+<p>In addition, the <samp class="codeph">wlm-config.yaml</samp> file must not contain empty or unspecified values. </p>
+</div>
+
+                        </div>
+</li>
+
+                    <li>Save the configuration file. </li>
+
+                    <li>Make a backup of the configuration file. You need this file when, at a later point in time, you want to uninstall <span>CLC</span> using the <span>CLC</span> uninstaller.<p>For details, refer to <a href="../chapter-6/c-uninstall.htm">Automatically Uninstalling CLC</a>.</p>
+</li>
+
+                </ol>
+
+            </div>
+
+            <p><strong>Example configuration file</strong>: </p>
+
+            <div class="p">
+                
+<div class="tablenoborder"><table summary="" cellspacing="0" cellpadding="4" frame="void" border="1" rules="all">
+                        
+                        <tbody>
+                            <tr>
+                                <td class="nocellnorowborder" valign="top" width="100%">
+                                    <pre class="codeblock">#&lt;horizon_root_folder&gt;
+horizon_directory: /usr/share/openstack-dashboard
+
+#IP address of DNS server used by master and worker nodes
+dns_server_ip: 10.141.19.52
+
+### Glance Authentication Configuration
+
+#Authentication URL
+os_auth_url: http://203.0.113.10:5000/v2.0
+
+#Project ID
+os_tenant_id: 98333aba48e756fa8f629c83a818ad57
+
+#OpenStack admin user
+os_username: "admin"
+
+#OpenStack admin password
+os_password_input: "secret"</pre>
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+</div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="../../installation/chapter-3/c-install.htm">Automatically Installing CLC</a></div>
+</div>
+</div>
+
+</body>
+</html>

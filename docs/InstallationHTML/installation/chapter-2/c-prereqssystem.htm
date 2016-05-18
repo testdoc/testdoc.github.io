@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en-us" lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Prerequisites" />
+<meta scheme="URI" name="DC.Relation" content="../../installation/chapter-2/c-prereqs.htm" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="About" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="../../commonltr.css" type="text/css" rel="stylesheet" />
+<link href="../../book.css" type="text/css" rel="stylesheet" />
+<title>Prerequisites</title>
+</head>
+<body id="About">
+
+
+    <h1 class="topictitle1">Prerequisites</h1>
+
+    <div>
+        <div class="section"><h4 class="sectiontitle">Access Rights and Privileges</h4>
+            
+            <p>You must have:</p>
+
+            <div class="p">
+                <ul>
+                    <li>Access to a fully functional OpenStack platform. Access as a user with administrator privileges is required.</li>
+
+                    <li>Access to the host on which the OpenStack Horizon service is installed. Access as a user with superuser privileges is required.</li>
+
+                    <li>Internet access without proxy settings, in particular access to <a href="https://gcr.io" target="_blank"><u>Google Container Registry</u></a> and <a href="https://hub.docker.com" target="_blank"><u>Docker Hub</u></a>. This is required because when an application is provisioned in a Kubernetes cluster, Kubernetes tries to download a Docker container image.</li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+        <div class="section"><h4 class="sectiontitle">System Requirements</h4>
+            
+            <p><span>CLC</span> can be installed to the following OpenStack platform (OSP):</p>
+
+            <div class="p">
+                <ul>
+                    <li>Red Hat Enterprise Linux OSP 7<p>For a list of certified operating systems working with Red Hat Enterprise Linux OSP 7, refer to the official Red Hat Web site. </p>
+</li>
+
+                    <li>OSP 7 must be configured to use hardware-based virtualization such as KVM (kernel-based virtual machine). Make sure that no emulation hypervisor such as QEMU is configured.</li>
+
+                    <li>The OSP 7 orchestration module (Heat) must be installed on the machine you want to use for provisioning clusters.  </li>
+
+                    <li><span>CLC</span> supports the following Web browsers: <div class="p">
+                            <ul>
+                                <li>Google Chrome 45.0</li>
+
+                                <li>Microsoft Internet Explorer 11.0</li>
+
+                                <li>Mozilla Firefox 40.0</li>
+
+                            </ul>
+
+                        </div>
+</li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+        <div class="section"><h4 class="sectiontitle">Physical Resources</h4>
+            
+            <p>In OpenStack, flavors are used for defining the compute, memory, and storage capacity of a virtual server. As such, a flavor is a virtual hardware template. When a cluster is provisioned, <span>CLC</span> creates the nodes of the cluster. The nodes are instances in OpenStack. </p>
+
+            <p>The minimum configuration for the nodes provisioned with the preassembled CentOS Atomic base image is as follows:</p>
+
+            <div class="p">
+                <ul>
+                    <li>1 vCPU must be present for each node in the cluster. In your OpenStack environment, this vCPU must not be shared with other VMs.</li>
+
+                    <li>1024 MB of RAM virtual machine memory.</li>
+
+                    <li>10 GB of virtual root disk size. This is an ephemeral disk the base image is copied into. You do not use it when you boot from a persistent volume. </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="../../installation/chapter-2/c-prereqs.htm">Prerequisites and Preparations</a></div>
+</div>
+</div>
+
+</body>
+</html>

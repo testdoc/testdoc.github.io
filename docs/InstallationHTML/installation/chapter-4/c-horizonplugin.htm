@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en-us" lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Installing the CLC Horizon Plugin" />
+<meta scheme="URI" name="DC.Relation" content="../../installation/chapter-4/c-install.htm" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="About" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="../../commonltr.css" type="text/css" rel="stylesheet" />
+<link href="../../book.css" type="text/css" rel="stylesheet" />
+<title>Installing the CLC Horizon Plugin</title>
+</head>
+<body id="About">
+
+
+    <h1 class="topictitle1">Installing the <span>CLC</span> Horizon Plugin</h1>
+
+    <div>
+        <div class="section">
+            <p>Proceed as follows to install the <span>CLC</span> plugin for the OpenStack dashboard: </p>
+
+            <div class="p">
+                <ol>
+                    <li class="liexpand">Log in as a superuser to the OpenStack host where the dashboard is installed.</li>
+
+                    <li class="liexpand">Copy the following folder to the folder on your OpenStack host where the dashboard is installed (<samp class="codeph">&lt;horizon-root-folder&gt;</samp>):<p><samp class="codeph">&lt;InstDir&gt;/manual-installation/horizon-wlm-plugin/wlm</samp></p>
+<p>For example:</p>
+<div class="p">
+                            <pre class="codeblock">scp -r horizon-wlm-plugin/wlm /usr/share/openstack-dashboard/</pre>
+
+                        </div>
+<div class="p">
+                            <div class="note"><span class="notetitle">Note:</span> Do not move the folder (<samp class="codeph">mv</samp>) but copy it!</div>
+
+                        </div>
+
+                    </li>
+
+                    <li class="liexpand">Set the access rights for this folder to <samp class="codeph">755</samp>:<div class="p">
+                            <pre class="codeblock">sudo chmod -R 755 &lt;horizon-root-folder&gt;/wlm</pre>
+
+                        </div>
+<p>In this way, the folder contents can be listed and read by all users, and all files in it can be executed. </p>
+</li>
+
+                    <li class="liexpand">Copy the <samp class="codeph">wlm.py</samp> file from the <samp class="codeph">&lt;InstDir&gt;/manual-installation/</samp> folder to the following folder on your OpenStack host where the dashboard is installed:<p><samp class="codeph">&lt;horizon-root-folder&gt;/openstack_dashboard/local/enabled/</samp></p>
+<p>The <samp class="codeph">wlm.py</samp> file defines the location where to add the <span>CLC</span>-specific panel to the OpenStack dashboard, the location of the Heat orchestration template for the automatic provisioning of clusters, as well as the IP address of the DNS server of your environment. </p>
+</li>
+
+                    <li class="liexpand">Adapt the following values in the copied <samp class="codeph">wlm.py</samp> file:<div class="p">
+                            
+<div class="tablenoborder"><table summary="" cellspacing="0" cellpadding="4" frame="void" border="1" rules="all">
+                                    
+                                    <tbody>
+                                        <tr>
+                                            <td class="nocellnorowborder" valign="top" width="100%">
+                                                <pre class="codeblock">WLM_HEAT_TEMPLATE_FILE_PATH=
+  &lt;horizon-root-folder&gt;/wlm/heat-provisioner/kubecluster.yaml
+
+DNS_SERVER_IP_ADDRESS=&lt;IP of your DNS server&gt;</pre>
+
+                                            </td>
+
+                                        </tr>
+
+                                    </tbody>
+
+                                </table>
+</div>
+
+                        </div>
+The <samp class="codeph">kubecluster.yaml</samp> Heat template is used to provision a Kubernetes cluster with one or more nodes (default: 2). The cluster uses Flannel to provide an overlay network connecting Kubernetes pods deployed on different nodes. Pods are the smallest deployable units that can be created, scheduled, and managed by Kubernetes. </li>
+
+                    <li class="liexpand">Since the <span>CLC</span>-specific panel added to the OpenStack dashboard requires some Javascript and a style sheet so that it can be rendered completely, you need to collect these static files and add them to your OpenStack environment. <p>Execute the following command in the <samp class="codeph">&lt;horizon-root-folder&gt;</samp> folder:</p>
+<div class="p">
+                            <pre class="codeblock">sudo ./manage.py collectstatic</pre>
+
+                        </div>
+</li>
+
+                    <li class="liexpand">For finishing the integration of the <span>CLC</span> plugin into the dashboard,  restart the Horizon service. <p>For example:</p>
+<div class="p">
+                            <pre class="codeblock">sudo service httpd restart</pre>
+
+                        </div>
+</li>
+
+                </ol>
+
+            </div>
+
+        </div>
+
+    </div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="../../installation/chapter-4/c-install.htm">Manually Installing CLC</a></div>
+</div>
+</div>
+
+</body>
+</html>

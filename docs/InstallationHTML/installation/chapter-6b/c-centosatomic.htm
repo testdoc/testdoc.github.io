@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en-us" lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Deleting the CentOS Atomic Host Image" />
+<meta scheme="URI" name="DC.Relation" content="../../installation/chapter-6b/c-uninstall.htm" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="About" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="../../commonltr.css" type="text/css" rel="stylesheet" />
+<link href="../../book.css" type="text/css" rel="stylesheet" />
+<title>Deleting the CentOS Atomic Host Image</title>
+</head>
+<body id="About">
+
+
+    <h1 class="topictitle1">Deleting the CentOS Atomic Host Image</h1>
+
+    <div>
+        <div class="section">
+            <p>As a first step in the manual uninstallation of <span>CLC</span>, you need to delete the preassembled <span>CLC</span> Atomic host base image for the cluster nodes in your OpenStack instance. </p>
+
+            <p>You can use the OpenStack dashboard or the OpenStanck <samp class="codeph">glance</samp> command for deleting the preassembled base image for cluster nodes. </p>
+
+        </div>
+
+        <div class="section"><h4 class="sectiontitle">Deleting the Image Using the OpenStack Dashboard</h4>
+            
+            <p>To delete the CentOS Atomic host image using the OpenStack dashboard, proceed as follows: </p>
+
+            <div class="p">
+                <ol>
+                    <li class="liexpand">Login to the OpenStack dashboard as an administrator. </li>
+
+                    <li class="liexpand">Go to <strong>Admin &gt; System &gt; Images</strong>. </li>
+
+                    <li class="liexpand">Select the <samp class="codeph">WLM:Atomic</samp> image, and click <strong>Delete Images</strong>.</li>
+
+                    <li class="liexpand">Confirm the deletion of the image.</li>
+
+                </ol>
+
+            </div>
+
+        </div>
+
+        <div class="section"><h4 class="sectiontitle">Deleting the Image using the CLI</h4>
+            
+            <p>You must have the appropriate credentials for the Glance client configuration if you want to use the OpenStack Glance client to make queries against your OpenStack cloud. For deleting the <span>CLC</span> CentOS Atomic host image using the Glance client, you need to set the required environment variables for the Glance client. If you manually installed <span>CLC</span> as described in <a href="../chapter-4/c-install.htm">Manually Installing CLC</a>, you have already created the required environment file, <samp class="codeph">openrc.sh</samp>. Reuse this file containing the credentials that all OpenStack services use, and for setting the environment variables for your current shell. </p>
+
+            <p><strong>To delete the CentOS Atomic host image</strong>:</p>
+
+            <p>Execute the following <samp class="codeph">glance</samp> command: </p>
+
+            <div class="p">
+                
+<div class="tablenoborder"><table summary="" cellspacing="0" cellpadding="4" frame="void" border="1" rules="all">
+                        
+                        <tbody>
+                            <tr>
+                                <td class="nocellnorowborder" valign="top" width="100%">
+                                    <pre class="codeblock">glance image-delete WLM:Atomic</pre>
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+</div>
+
+            </div>
+
+            <p><strong>To confirm that the image was deleted</strong>:</p>
+
+            <p>Execute the following <samp class="codeph">glance</samp> command: </p>
+
+            <div class="p">
+                <pre class="codeblock">glance image-list</pre>
+
+            </div>
+
+            <p>This command no longer shows the <span>CLC</span> image.</p>
+
+        </div>
+
+    </div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="../../installation/chapter-6b/c-uninstall.htm">Manually Uninstalling CLC</a></div>
+</div>
+</div>
+
+</body>
+</html>

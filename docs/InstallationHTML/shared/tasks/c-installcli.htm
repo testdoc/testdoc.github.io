@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en-us" lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Preparing the Kubernetes CLI" />
+<meta scheme="URI" name="DC.Relation" content="../../installation/chapter-5/c-nextsteps.htm" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="About" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="../../commonltr.css" type="text/css" rel="stylesheet" />
+<link href="../../book.css" type="text/css" rel="stylesheet" />
+<title>Preparing the Kubernetes CLI</title>
+</head>
+<body id="About">
+
+
+    <h1 class="topictitle1">Preparing the Kubernetes CLI</h1>
+
+    <div>
+        <div class="section">
+            <p>To deploy and manage applications on Kubernetes, you use the Kubernetes command-line tool, <samp class="codeph">kubectl</samp>. It lets you inspect your cluster resources, create, delete, and update components, and much more. You will use it to look at your new cluster and bring up example applications. </p>
+
+            <p>So, before you can start with the deployment of workloads to the cluster nodes, you need to make the Kubernetes command-line interface (CLI) available. The binaries of the CLI are available in the <samp class="codeph">&lt;InstDir&gt;/cli</samp> folder. </p>
+
+            <p>To be able to execute the <samp class="codeph">kubectl</samp> commands from any folder, link <samp class="codeph">kubectl</samp> to your <samp class="codeph">/usr/local/bin</samp> folder, for example:</p>
+
+            <div class="p">
+                <pre class="codeblock">sudo ln -s &lt;InstDir&gt;/cli/kubectl /usr/local/bin/kubectl</pre>
+
+            </div>
+
+            <p>To manage your Kubernetes environment, and to deploy workloads into the containers, you run the <samp class="codeph">kubectl</samp> commands. <samp class="codeph">kubectl</samp> controls the Kubernetes cluster manager. </p>
+
+            <p>For a complete list of the parameters that are supported, you can execute the following command: </p>
+
+            <div class="p">
+                <pre class="codeblock">kubectl --help</pre>
+
+            </div>
+
+            <p>For details on the parameters for <samp class="codeph">kubectl</samp>, you can also refer to <a href="https://cloud.google.com/container-engine/docs/kubectl/" target="_blank"><u>Google's Kubernetes CLI description</u></a>.</p>
+
+            <div class="p">
+                <div class="note"><span class="notetitle">Note:</span> If the <samp class="codeph">kubectl</samp> command cannot be executed, the executable bit might not be set for the file. You can check this, for example, by using the <samp class="codeph">ls -l</samp> command. If the executable bit is not set, you can set it with the following command: <p><samp class="codeph">chmod +x kubectl</samp></p>
+</div>
+
+            </div>
+
+            
+                
+            <p>For samples of how to use the <samp class="codeph">kubectl</samp> commands, refer to the <em>Cluster Management Guide</em>. </p>
+
+            
+            
+        </div>
+
+    </div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="../../installation/chapter-5/c-nextsteps.htm">Next Steps</a></div>
+</div>
+</div>
+
+</body>
+</html>

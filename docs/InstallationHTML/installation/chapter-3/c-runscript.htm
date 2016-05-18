@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en-us" lang="en-us">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Executing the Automatic Installation" />
+<meta scheme="URI" name="DC.Relation" content="../../installation/chapter-3/c-install.htm" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="About" name="DC.Identifier" />
+<meta content="en-us" name="DC.Language" />
+<link href="../../commonltr.css" type="text/css" rel="stylesheet" />
+<link href="../../book.css" type="text/css" rel="stylesheet" />
+<title>Executing the Automatic Installation</title>
+</head>
+<body id="About">
+
+
+    <h1 class="topictitle1">Executing the Automatic Installation</h1>
+
+    <div>
+        <div class="section">Once you have prepared your host and the <samp class="codeph">wlm-config.yaml</samp> configuration file, run the <span>CLC</span> installer as follows: <div class="p">
+                <ol>
+                    <li>Go to the <samp class="codeph">&lt;InstDir&gt;/auto-installation</samp> folder.</li>
+
+                    <li>You need the following information at hand:<ul>
+                            <li>IP address or host name of the OpenStack host where the Horizon service is running.</li>
+
+                            <li>The private key or the password of the installing user to be able to access the OpenStack host via SSH.</li>
+
+                        </ul>
+</li>
+
+                    <li>
+                        <p>Run the <samp class="codeph">wlm-playbook.yaml</samp> Ansible playbook:</p>
+
+                        <div class="p">
+                            
+<div class="tablenoborder"><table summary="" cellspacing="0" cellpadding="4" frame="void" border="1" rules="all">
+                                    
+                                    <tbody>
+                                        <tr>
+                                            <td class="nocellnorowborder" valign="top" width="100%">
+                                                <pre class="codeblock">ansible-playbook \
+   -i &lt;horizon host&gt;, \
+   -u &lt;login user&gt; \
+      --private-key &lt;path of openstack ssh-key&gt; | -k \
+   [-b --become-user &lt;OpenStack CLI User&gt; \
+       --become-method=sudo --ask-become-pass \]
+   wlm-playbook.yaml</pre>
+
+                                            </td>
+
+                                        </tr>
+
+                                    </tbody>
+
+                                </table>
+</div>
+
+                        </div>
+
+                    </li>
+
+                </ol>
+
+            </div>
+</div>
+
+        <div class="section">
+            <div class="p">The options above have the following meaning: <ul>
+                    <li><samp class="codeph">-i &lt;horizon host&gt;</samp><div class="p">
+                            <ul>
+                                <li>Specify the IP address or host name of your the OpenStack host on which the Horizon service is running.</li>
+
+                                <li>Make sure to enter a comma after the IP address or host name, and to enter a blank after the comma.</li>
+
+                            </ul>
+
+                        </div>
+</li>
+
+                    <li><samp class="codeph">-u &lt;login user&gt; --private-key &lt;path of openstack ssh-key&gt; | -k</samp><div class="p">
+                            <ul>
+                                <li>Specify the user name of the OpenStack administrator running the installation script. </li>
+
+                                <li>The path of the OpenStack SSH key is the path to the file containing the private key of the above administrator and is required so that the administrator can access the OpenStack instance via SSH.</li>
+
+                                <li>If you want to use a password, specify the <samp class="codeph">-k</samp> option instead of <samp class="codeph">--private-key</samp>. You will be prompted for the SSH password of the <samp class="codeph">login user</samp> instead of assuming key-based authentication with the SSH agent.</li>
+
+                            </ul>
+
+                        </div>
+</li>
+
+                    <li><samp class="codeph">[-b --become-user &lt;OpenStack CLI User&gt; --become-method=sudo --ask-become-pass]</samp><div class="p">
+                            <ul>
+                                <li>Optionally, specify a user who will later be able to execute commands from the OpenStack command-line interface (CLI). This user will have superuser privileges (for example, the root user) in OpenStack.</li>
+
+                                <li>If the system is configured such that <samp class="codeph">sudo</samp> commands require a password, the <samp class="codeph">--ask-become-pass</samp> option ensures that the root user will be prompted for his password. </li>
+
+                                <li>If you omit the options, the user specified with the <samp class="codeph">-u</samp> option will be able to execute OpenStack CLI commands.</li>
+
+                            </ul>
+
+                        </div>
+</li>
+
+                </ul>
+</div>
+
+            <p>Example 1: </p>
+
+            <div class="p">
+                
+<div class="tablenoborder"><table summary="" cellspacing="0" cellpadding="4" frame="void" border="1" rules="all">
+                        
+                        <tbody>
+                            <tr>
+                                <td class="nocellnorowborder" valign="top" width="100%">
+                                    <pre class="codeblock">ansible-playbook \
+   -i 10.234.10.300, \
+   -u admin --private-key usr/bin/admin.key \
+   wlm-playbook.yaml</pre>
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+</div>
+
+            </div>
+
+            <p>Example 2:</p>
+
+            <div class="p">
+                
+<div class="tablenoborder"><table summary="" cellspacing="0" cellpadding="4" frame="void" border="1" rules="all">
+                        
+                        <tbody>
+                            <tr>
+                                <td class="nocellnorowborder" valign="top" width="100%">
+                                    <pre class="codeblock">ansible-playbook \
+   -i 10.140.18.49, \
+   -u osp7 \
+   -k \
+   -b --become-user root --become-method=sudo --ask-become-pass \
+   wlm-playbook.yaml</pre>
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+</div>
+
+            </div>
+
+        </div>
+
+        <div class="section"><h4 class="sectiontitle">Results</h4>
+            
+            <p>The automatic installation of <span>CLC</span> has the following results: </p>
+
+            <div class="p">
+                <ul>
+                    <li>The <span>CLC</span> Horizon plugin is installed to the <samp class="codeph">/wlm</samp> subfolder of the Horizon root folder. It adds an additional panel to the OpenStack dashboard. The plugin installation also adds <span>CLC</span> Heat orchestration templates, which are later used to provision a Kubernetes cluster.</li>
+
+                    <li>The preassembled <span>CLC</span> CentOS Atomic image is uploaded and registered in the OpenStack environment. This image is the base image for cluster nodes: <samp class="codeph">WLM:Atomic</samp>. </li>
+
+                </ul>
+
+            </div>
+
+            <div class="p">
+                <div class="note"><span class="notetitle">Note:</span> When the installation process is complete, check the console output of the shell from which you executed the Ansible playbook. For example, the <span>CLC</span> installer checks whether the specified IP address of the DNS server is valid and whether the DNS server can be reached. If this is not the case, warnings are output to the console. Check and possibly correct the <samp class="codeph">wlm-config.yaml</samp> configuration file, and run the Ansible playbook again. </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="../../installation/chapter-3/c-install.htm">Automatically Installing CLC</a></div>
+</div>
+</div>
+
+</body>
+</html>
