@@ -1,4 +1,4 @@
-## Instructions for Contributing to the Docs/Website
+## This is a copy Instructions for Contributing to the Docs/Website
 
 Welcome! We are very pleased you want to contribute to the documentation and/or website for Kubernetes.
 
